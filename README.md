@@ -1,5 +1,5 @@
 ## Svelte TODO App like front-end only 
-This tutorial is related with [Django Backend TOD app](https://github.com/sivanov/api-django)
+This tutorial is related with [Django Backend TODO app](https://github.com/sivanov/api-django)
 
 ##  Installation
 In order to work with Svelte, you need to have Node.js installed.
@@ -113,3 +113,46 @@ Edit again file:
 ```
 Now date inside ```<p>``` tags is dynamically generated
 ![](./screenshots/svelte-api-show-data-from-json-dinamically.png)
+
+
+## Add grid system for smal and  large screens
+
+Add this section in top of file: src/App.svelte
+```html
+<style>
+  .card {
+    background-color: dodgerblue;
+    color: white;
+    padding: 1rem;
+  }
+  .cards {
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+</style>
+```
+scroll down on same file and replace  all section with name ```main``` like this:
+```html
+<main>
+  <h3>TODO App</h3>
+  <div class="cards">
+    {#each items as item}
+        <div class="card">
+          <h4>{item.title}</h4>
+          <p><i>Category: {item.category}</i></p>
+          <p>Description: {item.description}</p>
+        </div>
+    {:else}
+      <!-- this block renders when Tasks are empty OR items.length === 0 -->
+      <div class="card">
+        <p>loading...</p>
+      </div>
+    {/each}
+  </div> 
+</main>
+```
+
+Now result must loook likee this:
+![](./screenshots/svelte-css-grid-home-page.png)
